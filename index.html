@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời trang - Bộ sưu tập 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset và biến toàn cục */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* Header và Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            left: 0;
+            bottom: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Main content */
+        main {
+            margin-top: 80px; /* Để tránh bị header che */
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .view-detail-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .view-detail-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.5s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .modal-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-details h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .modal-details .price {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-details .description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .options {
+            margin-bottom: 2rem;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .colors, .sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-option:hover, .color-option.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .size-option {
+            padding: 0.5rem 1rem;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .size-option:hover, .size-option.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 5% 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.7rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content, .modal-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul li {
+                margin: 0.8rem 0;
+            }
+            
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .modal {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tạo hiệu ứng xuất hiện lần lượt cho các sản phẩm */
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Hiệu ứng cho header khi scroll */
+        header.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header với navigation -->
+    <header id="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">Fashion<span>Brand</span></a>
+            
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#products">Sản phẩm</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <h1>Thời trang - Bộ sưu tập 2026</h1>
+            <p>Khám phá xu hướng thời trang mới nhất với bộ sưu tập đặc biệt năm 2026. Chúng tôi mang đến cho bạn những sản phẩm chất lượng, thiết kế độc đáo và phong cách hiện đại.</p>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <h2 class="section-title">Về Thương Hiệu</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Chào mừng đến với bộ sưu tập thời trang 2026! Chúng tôi chuyên cung cấp giày, quần áo và phụ kiện chất lượng cao, phong cách hiện đại.</p>
+                    <p>Với hơn 10 năm kinh nghiệm trong ngành thời trang, chúng tôi tự hào mang đến cho khách hàng những sản phẩm không chỉ đẹp về thiết kế mà còn đảm bảo chất lượng và sự thoải mái khi sử dụng.</p>
+                    <p>Bộ sưu tập 2026 của chúng tôi tập trung vào sự kết hợp giữa phong cách tối giản và xu hướng hiện đại, tạo nên những sản phẩm phù hợp với mọi dịp từ công sở, dạo phố đến những sự kiện quan trọng.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Cửa hàng thời trang">
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products" id="products">
+            <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Các sản phẩm sẽ được thêm bằng JavaScript -->
+            </div>
+        </section>
+
+        <!-- Modal chi tiết sản phẩm -->
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal" id="product-modal">
+                <span class="close-modal" id="close-modal">&times;</span>
+                <div class="modal-content" id="modal-content">
+                    <!-- Nội dung modal sẽ được thêm bằng JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Liên Hệ</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Đường Thời Trang, Quận 1, TP.HCM</p>
+                <p><i class="fas fa-phone"></i> (028) 1234 5678</p>
+                <p><i class="fas fa-envelope"></i> info@fashionbrand.vn</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Thông Tin</h3>
+                <a href="#home">Trang chủ</a>
+                <a href="#about">Về chúng tôi</a>
+                <a href="#products">Sản phẩm</a>
+                <a href="#">Chính sách bảo mật</a>
+                <a href="#">Điều khoản sử dụng</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <p>Đăng ký để nhận thông tin về sản phẩm mới và khuyến mãi</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 Fashion Brand. Tất cả các quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dữ liệu sản phẩm
+        const products = [
+            {
+                id: 1,
+                name: "Giày Thể Thao Cao Cấp",
+                shortDesc: "Giày thể thao công nghệ đệm khí, thoải mái cả ngày dài",
+                longDesc: "Giày thể thao với công nghệ đệm khí tiên tiến, mang lại sự thoải mái tối đa cho đôi chân của bạn. Đế giày được thiết kế chống trượt, phù hợp cho nhiều hoạt động từ thể thao đến đi làm hàng ngày. Chất liệu vải dệt cao cấp, thoáng khí và dễ vệ sinh.",
+                price: "1,250,000 VNĐ",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                colors: ["#2c3e50", "#e74c3c", "#3498db", "#f1c40f"],
+                sizes: ["38", "39", "40", "41", "42", "43"]
+            },
+            {
+                id: 2,
+                name: "Áo Khoác Phong Cách",
+                shortDesc: "Áo khoác bomber phong cách streetwear, chất liệu chống nước",
+                longDesc: "Áo khoác bomber với thiết kế hiện đại, phù hợp với phong cách streetwear. Chất liệu vải chống nước nhẹ, có thể gấp gọn dễ dàng. Áo có nhiều túi tiện dụng, cổ áo và tay áo được bo chun co giãn tạo sự vừa vặn và ấm áp.",
+                price: "890,000 VNĐ",
+                image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80",
+                colors: ["#2c3e50", "#7f8c8d", "#e74c3c", "#34495e"],
+                sizes: ["S", "M", "L", "XL"]
+            },
+            {
+                id: 3,
+                name: "Quần Jeans Slim Fit",
+                shortDesc: "Quần jeans slim fit co giãn, form ôm tôn dáng",
+                longDesc: "Quần jeans với chất liệu denim co giãn 4 chiều, mang lại sự thoải mái và linh hoạt trong mọi hoạt động. Thiết kế slim fit ôm vừa vặn, tôn dáng người mặc. Có nhiều màu sắc và kiểu rách thời trang, phù hợp với nhiều phong cách khác nhau.",
+                price: "650,000 VNĐ",
+                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                colors: ["#2c3e50", "#34495e", "#7f8c8d", "#bdc3c7"],
+                sizes: ["28", "29", "30", "31", "32", "33"]
+            },
+            {
+                id: 4,
+                name: "Túi Xách Da Thật",
+                shortDesc: "Túi xách công sở da bò thật, thiết kế tối giản",
+                longDesc: "Túi xách được làm từ da bò thật cao cấp, với đường may tỉ mỉ và khóa kéo chất lượng. Thiết kế tối giản nhưng thanh lịch, phù hợp cho cả công sở và dạo phố. Bên trong có nhiều ngăn tiện dụng đựng laptop, tài liệu và các vật dụng cá nhân.",
+                price: "1,850,000 VNĐ",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                colors: ["#2c3e50", "#8b4513", "#d2691e", "#a0522d"],
+                sizes: ["One Size"]
+            }
+        ];
+
+        // DOM Elements
+        const productsGrid = document.getElementById('products-grid');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const productModal = document.getElementById('product-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalContent = document.getElementById('modal-content');
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const mainHeader = document.getElementById('main-header');
+
+        // Khởi tạo trang web
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hiển thị sản phẩm
+            renderProducts();
+            
+            // Thêm sự kiện cho menu toggle (responsive)
+            menuToggle.addEventListener('click', toggleMenu);
+            
+            // Thêm sự kiện đóng modal
+            closeModal.addEventListener('click', closeProductModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeProductModal();
+                }
+            });
+            
+            // Thêm sự kiện scroll cho header
+            window.addEventListener('scroll', handleScroll);
+            
+            // Thêm sự kiện cho các link navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Đóng menu trên mobile khi click
+                    if (window.innerWidth <= 768) {
+                        navMenu.classList.remove('active');
+                    }
+                    
+                    // Cuộn mượt đến section
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Khởi tạo hiệu ứng xuất hiện cho sản phẩm
+            initScrollAnimations();
+        });
+
+        // Hiển thị danh sách sản phẩm
+        function renderProducts() {
+            productsGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.shortDesc}</p>
+                        <div class="product-price">${product.price}</div>
+                        <button class="view-detail-btn" data-id="${product.id}">Xem chi tiết</button>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Thêm sự kiện cho các nút "Xem chi tiết"
+            document.querySelectorAll('.view-detail-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    openProductModal(productId);
+                });
+            });
+        }
+
+        // Mở modal hiển thị chi tiết sản phẩm
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Tạo HTML cho modal
+            let colorsHtml = '';
+            product.colors.forEach((color, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                colorsHtml += `<div class="color-option ${activeClass}" style="background-color: ${color};" data-color="${color}"></div>`;
+            });
+            
+            let sizesHtml = '';
+            product.sizes.forEach((size, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                sizesHtml += `<div class="size-option ${activeClass}" data-size="${size}">${size}</div>`;
+            });
+            
+            modalContent.innerHTML = `
+                <div class="modal-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="modal-details">
+                    <h2>${product.name}</h2>
+                    <div class="price">${product.price}</div>
+                    <p class="description">${product.longDesc}</p>
+                    
+                    <div class="options">
+                        <div class="option-title">Màu sắc:</div>
+                        <div class="colors">
+                            ${colorsHtml}
+                        </div>
+                        
+                        <div class="option-title">Kích thước:</div>
+                        <div class="sizes">
+                            ${sizesHtml}
+                        </div>
+                    </div>
+                    
+                    <button class="view-detail-btn" style="width: auto; padding: 0.8rem 2rem;">Thêm vào giỏ hàng</button>
+                </div>
+            `;
+            
+            // Hiển thị modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi modal mở
+            
+            // Thêm sự kiện cho các tùy chọn màu sắc và kích thước
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // Đóng modal chi tiết sản phẩm
+        function closeProductModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Cho phép cuộn trang lại
+        }
+
+        // Toggle menu trên mobile
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+        }
+
+        // Xử lý hiệu ứng scroll cho header
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        }
+
+        // Khởi tạo hiệu ứng xuất hiện khi scroll
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Quan sát các sản phẩm
+            document.querySelectorAll('.product-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+    </script>
+</body>
+</html>
